@@ -1,0 +1,9 @@
+<application>
+  <component name="AbbreviationManager">
+    <abbreviations>
+      <action id="AddSourcesContentToSourceMap" />
+      <action id="OverrideMethods" />
+      <action id="EditorActions" />
+    </abbreviations>
+  </component>
+</application>

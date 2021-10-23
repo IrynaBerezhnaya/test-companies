@@ -1,0 +1,150 @@
+<application>
+  <component name="LanguageInjectionConfiguration">
+    <injection language="SQLite" injector-id="js">
+      <display-name>HTML5 SQL Database (SQLite)</display-name>
+      <place disabled="true"><![CDATA[jsLiteralExpression().and(jsArgument("executeSql", 0))]]></place>
+    </injection>
+    <injection language="SQL" injector-id="js">
+      <display-name>SQL select/delete/insert/update/create</display-name>
+      <place disabled="true"><![CDATA[jsLiteralExpression().withText(string().matchesBrics("[\"'`] *(((SELECT|DELETE) .*FROM)|((INSERT|REPLACE) .*INTO)|(UPDATE .* SET)|((CREATE|DROP|ALTER) +((TEMPORARY )?TABLE|(UNIQUE )?INDEX))) .*[\"'`]?"))]]></place>
+    </injection>
+    <injection language="SQL" injector-id="js">
+      <display-name>SQL tagged string</display-name>
+      <place disabled="true"><![CDATA[taggedString("sql")]]></place>
+      <templateTag>sql</templateTag>
+    </injection>
+    <injection language="SQLite" injector-id="js">
+      <display-name>flash.data (SQLite)</display-name>
+      <place disabled="true"><![CDATA[jsLiteralExpression().and(asAssignedValue("text", "*", "dbStatement"))]]></place>
+      <place disabled="true"><![CDATA[jsLiteralExpression().and(asAssignedValue("text", "*", "statement", "st").withText(string().matchesBrics("[\"'`] *(((SELECT|DELETE) .*FROM)|((INSERT|REPLACE) .*INTO)|(UPDATE .*SET)|((CREATE|DROP|ALTER) +(TABLE|INDEX))) .*[\"'`]?")))]]></place>
+      <place disabled="true"><![CDATA[jsLiteralExpression().and(asAssignedValue("text", "flash.data.SQLStatement"))]]></place>
+    </injection>
+    <injection language="JSON" injector-id="sql" pattern="(?i)json(b)?">
+      <display-name>(?i)json(b)?</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regclass" fragment="SQL_TABLE_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regclass</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regconfig" fragment="SQL_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regconfig</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regdictionary" fragment="SQL_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regdictionary</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regnamespace" fragment="SQL_SCHEMA_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regnamespace</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regoper" fragment="SQL_OPERATOR_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regoper</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regoperator" fragment="SQL_OPERATOR_SIGNATURE" hosts="PostgreSQL">
+      <display-name>(?i)regoperator</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regproc" fragment="SQL_FUNCTION_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regproc</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regprocedure" fragment="SQL_FUNCTION_SIGNATURE" hosts="PostgreSQL">
+      <display-name>(?i)regprocedure</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regrole" fragment="SQL_ROLE_REFERENCE" hosts="PostgreSQL">
+      <display-name>(?i)regrole</display-name>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql" pattern="(?i)regtype" fragment="SQL_TYPE_ELEMENT" hosts="PostgreSQL">
+      <display-name>(?i)regtype</display-name>
+    </injection>
+    <injection language="XML" injector-id="sql" pattern="(?i)xml(type)?">
+      <display-name>(?i)xml(type)?</display-name>
+    </injection>
+    <injection language="JSON" injector-id="sql">
+      <display-name>ClickHouse JSON</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("ClickHouse").functionArgument(0, sqlFunctionCall().name("visitParamHas", "visitParamExtractUInt", "visitParamExtractInt", "visitParamExtractFloat", "visitParamExtractBool", "visitParamExtractRaw", "visitParamExtractString").params(sqlExpressions().count(2)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("ClickHouse").insertWithFormatInput("JSON")]]></place>
+    </injection>
+    <injection language="XML" injector-id="sql">
+      <display-name>ClickHouse XML</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("ClickHouse").insertWithFormatInput("XML")]]></place>
+    </injection>
+    <injection language="XML" injector-id="sql">
+      <display-name>Derby XML</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Derby").functionArgument(0, sqlFunctionCall().name("xmlparse").params(sqlExpressions().count(1)))]]></place>
+    </injection>
+    <injection language="XPath2" injector-id="sql">
+      <display-name>Derby XPath</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Derby").functionArgument(0, sqlFunctionCall().name("xmlexists", "xmlquery").params(sqlExpressions().count(2)))]]></place>
+    </injection>
+    <injection language="JSON" injector-id="sql">
+      <display-name>MySQL CONVERT(..., JSON)</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL").functionArgument(0, sqlFunctionCall().name("convert").params(sqlExpressions().count(1).at(0, sqlExpression().withNextMeaningfulSibling(leafTokens(","), 0).withNextMeaningfulSibling(psiElement().withText("json"), 1))))]]></place>
+    </injection>
+    <injection language="XML" injector-id="sql">
+      <display-name>MySQL XML</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL").functionArgument(0, sqlFunctionCall().name("ExtractValue").params(sqlExpressions().count(2)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL").functionArgument(0, sqlFunctionCall().name("UpdateXML").params(sqlExpressions().count(3)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL").functionArgument(2, sqlFunctionCall().name("UpdateXML").params(sqlExpressions().count(3)))]]></place>
+    </injection>
+    <injection language="XPath2" injector-id="sql">
+      <display-name>MySQL XPath</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL").functionArgument(1, sqlFunctionCall().name("ExtractValue").params(sqlExpressions().count(2)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL").functionArgument(1, sqlFunctionCall().name("UpdateXML").params(sqlExpressions().count(3)))]]></place>
+    </injection>
+    <injection language="JSON" injector-id="sql">
+      <display-name>Oracle JSON</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, -1, 1, sqlFunctionCall().name("json_array"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, sqlFunctionCall().name("json_query", "json_value", "json_array_agg"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, sqlFunctionCall().name("json_table"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(1, -1, 2, sqlFunctionCall().name("json_object"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(1, sqlFunctionCall().name("json_object_agg"))]]></place>
+    </injection>
+    <injection language="XML" injector-id="sql">
+      <display-name>Oracle XML</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, sqlFunctionCall().name("xmlparse", "xmltype").params(sqlExpressions().count(1)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, sqlFunctionCall().name("xmlserialize"))]]></place>
+    </injection>
+    <injection language="XPath2" injector-id="sql">
+      <display-name>Oracle XPath</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, sqlFunctionCall().name("xmlquery", "xmlexists"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(0, sqlFunctionCall().name("xmltable"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(1, -2, 2, sqlFunctionCall().name("updatexml"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(1, sqlFunctionCall().name("appendchildxml", "insertxmlafter", "insertxmlbefore").params(sqlExpressions().count(3, 4)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(1, sqlFunctionCall().name("extract", "extractvalue", "deletexml", "existsnode").params(sqlExpressions().count(2, 3)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Oracle").functionArgument(1, sqlFunctionCall().name("insertchildxml", "insertchildxmlafter", "insertchildxmlbefore").params(sqlExpressions().count(4, 5)))]]></place>
+    </injection>
+    <injection language="XPath2" injector-id="sql">
+      <display-name>PostgreSQL XPath</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(0, sqlFunctionCall().name("xmlexists", "xmltable").params(sqlExpressions().count(2)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(0, sqlFunctionCall().name("xpath", "xpath_exists").params(sqlExpressions().count(2, 3)))]]></place>
+    </injection>
+    <injection language="PostgreSQL" injector-id="sql">
+      <display-name>PostgreSQL dblink</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(0, sqlFunctionCall().name("dblink", "dblink_exec").params(sqlExpressions().count(1, 2).atOpt(1, sqlExpression().withType("boolean"))))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(1, sqlFunctionCall().name("dblink", "dblink_exec").params(sqlExpressions().count(2, 3)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(1, sqlFunctionCall().name("dblink_open").params(sqlExpressions().count(2, 3).atOpt(2, sqlExpression().withType("boolean"))))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(1, sqlFunctionCall().name("dblink_send_query").params(sqlExpressions().count(2)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("PostgreSQL").functionArgument(2, sqlFunctionCall().name("dblink_open").params(sqlExpressions().count(3, 4)))]]></place>
+    </injection>
+    <injection language="JSON" injector-id="sql">
+      <display-name>SQL CAST(... as JSON)</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("MySQL", "PostgreSQL").functionArgument(0, sqlFunctionCall().name("cast").params(sqlExpressions().count(1).at(0, sqlExpression().withNextMeaningfulSibling(leafTokens("as"), 0).withNextMeaningfulSibling(psiElement().withText("json"), 1))))]]></place>
+    </injection>
+    <injection language="JSON" injector-id="sql">
+      <display-name>SQL Server JSON</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("TSQL").functionArgument(0, sqlFunctionCall().name("openjson").params(sqlExpressions().count(1, 2)))]]></place>
+    </injection>
+    <injection language="XPath2" injector-id="sql">
+      <display-name>SQL Server XPath</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("TSQL").functionArgument(0, sqlFunctionCall().name("nodes", "exist", "query").qualifier(sqlExpression().withType("xml")).params(sqlExpressions().count(1)))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("TSQL").functionArgument(0, sqlFunctionCall().name("value").qualifier(sqlExpression().withType("xml")).params(sqlExpressions().count(2)))]]></place>
+    </injection>
+    <injection language="XML" injector-id="sql">
+      <display-name>Sybase XML</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Sybase").binaryExpressionArgument(1, sqlBinaryExpression().operation(leafTokens("xmltest").or("not", "xmltest")))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Sybase").functionArgument(0, sqlFunctionCall().name("xmlparse", "xmlvalidate"))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Sybase").functionArgument(1, sqlFunctionCall().name("xmlextract"))]]></place>
+    </injection>
+    <injection language="XPath2" injector-id="sql">
+      <display-name>Sybase XPath</display-name>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Sybase").binaryExpressionArgument(0, sqlBinaryExpression().operation(leafTokens("xmltest").or("not", "xmltest")))]]></place>
+      <place disabled="true"><![CDATA[sqlElement().forDialects("Sybase").functionArgument(0, sqlFunctionCall().name("xmlextract"))]]></place>
+    </injection>
+  </component>
+</application>

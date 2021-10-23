@@ -1,0 +1,17 @@
+<templateSet group="PHP">
+  <template name="vd" value="var_dump();&#10;die;" description="var_dump" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="vr" value="mb_var_dump($END$);" description="custom var_dump function" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="wr" value="write_log($END$);" description="custom write_log function" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+</templateSet>

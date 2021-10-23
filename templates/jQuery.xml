@@ -1,0 +1,7 @@
+<templateSet group="jQuery">
+  <template name="cl" value="console.log();" description="console.log" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
