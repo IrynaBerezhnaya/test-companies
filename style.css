@@ -122,12 +122,25 @@ a:hover,
 }
 
 .navbar-dark .navbar-nav .nav-link,
-.ib-nav-link {
+.ib-nav-link,
+.menu-item a {
     font-size: 17px;
     color: #fff;
+    text-decoration: none;
+    padding-right: 14px;
 }
 
-.nav-link.active {
+li {
+    list-style-type: none;
+}
+
+.menu-wrapper {
+    display: flex;
+    margin-top: revert;
+}
+
+.nav-link.active,
+.menu-item.active {
     font-weight: 900;
 }
 
@@ -406,6 +419,10 @@ a:hover,
         top: 54%;
         left: 54%;
     }
+}
+
+.menu-button-container {
+    display: none;
 }
 
 @media screen and (max-width: 1200px) {

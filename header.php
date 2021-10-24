@@ -40,17 +40,8 @@
                     <input class="form-control me-2 ib-search-input" type="search" placeholder="Search"
                            aria-label="Search">
                 </form>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ps-2">
-                    <li class="nav-item">
-                        <a class="nav-link ib-nav-link active" aria-current="page" href="#">Companies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ib-nav-link" href="#">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link ib-nav-link" href="#">About Us</a>
-                    </li>
-                </ul>
+
+	            <?php get_template_part( 'template-parts/header/site-header' ); ?>
 
             </div>
 
@@ -65,6 +56,8 @@
 
         </div>
     </nav>
+
+
 
     <div id="content" class="site-content">
         <div id="primary" class="content-area container ib-content-area">
