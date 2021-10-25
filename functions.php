@@ -27,6 +27,15 @@ function add_scripts_and_styles() {
 
 add_action( 'wp_enqueue_scripts', 'add_scripts_and_styles', 20 );
 
+/**
+ * Load textdomain
+ */
+function ib_load_theme_textdomain() {
+	load_child_theme_textdomain( 'twentytwentyone-child', get_stylesheet_directory_uri() . '/languages' );
+}
+
+add_action( 'after_setup_theme', 'ib_load_theme_textdomain' );
+
 if ( ! function_exists( 'write_log' ) ) {
 
 	function write_log( $variable, $text_before = '' ) {
@@ -53,6 +62,9 @@ function mb_var_dump( $variable, $text_before = '' ) {
 	echo '</pre>';
 }
 
+/**
+ * Ajax filter
+ */
 function ib_filter_companies_ajax_handler() {
 
 	$filter_data = isset( $_POST['filter_data'] ) ? $_POST['filter_data'] : '';
@@ -107,7 +119,7 @@ function ib_filter_companies_ajax_handler() {
 add_action( 'wp_ajax_nopriv_ib_filter_companies', 'ib_filter_companies_ajax_handler' );
 add_action( 'wp_ajax_ib_filter_companies', 'ib_filter_companies_ajax_handler' );
 
-/*
+/**
  * Display Сompanies
  */
 function ib_display_companies() {
@@ -127,7 +139,7 @@ function ib_display_companies() {
 	the_title();
 	echo '</h2>';
 
-	echo '<p class="ib-categories">Categories: ';
+	echo '<p class="ib-categories">' . __('Categories: ', 'twentytwentyone-child');
 	$terms = get_the_terms( $post->ID, 'company_categories' );
 
 	foreach ( $terms as $term ) {
@@ -135,7 +147,7 @@ function ib_display_companies() {
 	}
 	echo '</p>';
 
-	echo '<p class="ib-types">Types: ';
+	echo '<p class="ib-types">' . __('Types: ', 'twentytwentyone-child');
 	$terms = get_the_terms( $post->ID, 'company_types' );
 
 	foreach ( $terms as $term ) {
@@ -143,7 +155,7 @@ function ib_display_companies() {
 	}
 	echo '</p>';
 
-	echo '<p class="ib-price">Starting at ';
+	echo '<p class="ib-price">' . __('Starting at ', 'twentytwentyone-child');
 	the_field( 'ib_price' );
 	echo '</p>';
 

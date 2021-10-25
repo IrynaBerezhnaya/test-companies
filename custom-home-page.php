@@ -28,16 +28,16 @@ get_header(); ?>
             </div>
         </div>
         <div class="col-xl-6 ib-main-text">
-            <h2>Find a Company</h2>
-            <p>Welcome to the "Find a company" Portal! This allows you to search for and access company information from
-                the national business registers.</p>
+			<?php echo '<h2>' . __( 'Find a Company', 'twentytwentyone-child' ) . '</h2>'; ?>
+			<?php echo '<p>' . __( 'Welcome to the "Find a company" Portal! This allows you to search for and access company information from
+                the national business registers.', 'twentytwentyone-child' ) . '</p>'; ?>
 			<?php get_search_form(); ?>
         </div>
     </div>
     <p class="ib-nav-company-types">
-        <a href="#">Companies</a> /
-        <a href="#">Company Activities</a> /
-        <a href="#">Company Types</a>
+		<?php echo '<a href="#">' . __( 'Companies', 'twentytwentyone-child' ) . '</a>  /'; ?>
+		<?php echo '<a href="#">' . __( 'Company Activities', 'twentytwentyone-child' ) . '</a>  /'; ?>
+		<?php echo '<a href="#">' . __( 'Company Types', 'twentytwentyone-child' ) . '</a>'; ?>
     </p>
     <div class="ib-company-block d-flex">
         <div class="ib-loop-categories-types">
@@ -51,30 +51,31 @@ get_header(); ?>
 					'taxonomy' => 'company_types'
 				] );
 
-				?>
+				echo '<h4>' . __( 'All Сompany Сategories:', 'twentytwentyone-child' ) . '</h4>';
 
-                <h4>All Сompany Сategories:</h4>
-				<?php foreach ( $categories as $category ) : ?>
+				foreach ( $categories as $category ) : ?>
                     <div class="ib-company-list-categories">
                         <input type="checkbox" name="categories[]" class="company_list_js"
                                id="company_categories_<?php echo $category->term_id; ?>" data-type="company"
                                value="<?php echo $category->slug; ?>" data-slug="<?php echo $category->slug; ?>">
                         <label for="company_categories_<?php echo $category->term_id; ?>"> <?php echo $category->name; ?> </label>
                     </div>
-				<?php endforeach; ?>
+				<?php endforeach;
 
+				echo '<h4 class="ib-title-company-types">' . __( 'All Сompany Types:', 'twentytwentyone-child' ) . '</h4>';
 
-                <h4 class="ib-title-company-types">All Сompany Types:</h4>
-				<?php foreach ( $tags as $tag ) : ?>
+				foreach ( $tags as $tag ) : ?>
                     <div class="ib-company-list-types">
                         <input type="checkbox" name="types[]" class="company_list_js"
                                id="company_types_<?php echo $tag->term_id; ?>" data-type="company"
                                value="<?php echo $tag->slug; ?>" data-slug="<?php echo $tag->slug; ?>">
                         <label for="company_types_<?php echo $tag->term_id; ?>"> <?php echo $tag->name; ?> </label>
                     </div>
-				<?php endforeach; ?>
+				<?php endforeach;
 
-                <button type="submit" class="btn btn-light ib-btn-filter">Filter</button>
+				echo '<button type="submit" class="btn btn-light ib-btn-filter">' . __( 'Filter', 'twentytwentyone-child' ) . '</button>';
+				?>
+
                 <input type="hidden" name="action" value="myfilter">
             </form>
 
@@ -102,7 +103,6 @@ get_header(); ?>
 
 
 <?php
-
 
 
 get_footer(); ?>

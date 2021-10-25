@@ -27,7 +27,8 @@
        href="#content"><?php esc_html_e( 'Skip to content', 'twentytwentyone' ); ?></a>
     <nav class="navbar navbar-expand-lg navbar-dark ib-bg-dark ib-navbar pb-0 pt-0 d-flex justify-content-between">
         <div class="container">
-            <a class="navbar-brand ib-navbar-brand" href="<?php echo get_home_url(); ?>" rel="home">COMPANIES</a>
+
+			<?php echo '<a class="navbar-brand ib-navbar-brand" href="' . get_home_url() . '" rel="home">' . __( 'COMPANIES', 'twentytwentyone-child' ) . '</a>'; ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +42,7 @@
                            aria-label="Search">
                 </form>
 
-	            <?php get_template_part( 'template-parts/header/site-header' ); ?>
+				<?php get_template_part( 'template-parts/header/site-header' ); ?>
 
             </div>
 
@@ -51,12 +52,11 @@
                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
             </svg>
 
-            <button type="button" class="btn btn-outline-light ib-btn-sign_in">Entry</button>
-            <button type="button" class="btn btn-outline-success ib-btn-register">Register now</button>
+			<?php echo '<button type="button" class="btn btn-outline-light ib-btn-sign_in">' . __( 'Entry', 'twentytwentyone-child' ) . '</button>'; ?>
+			<?php echo '<button type="button" class="btn btn-outline-success ib-btn-register">' . __( 'Register now', 'twentytwentyone-child' ) . '</button>'; ?>
 
         </div>
     </nav>
-
 
 
     <div id="content" class="site-content">
