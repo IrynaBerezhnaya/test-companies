@@ -44,9 +44,15 @@ p {
 }
 
 a:hover,
-.ib-company-list-categories:hover,
-.ib-company-list-types:hover {
+.ib-company-list-categories input:hover,
+.ib-company-list-categories label:hover,
+.ib-company-list-types input:hover,
+.ib-company-list-types label:hover {
     color: #C6FF7D;
+}
+
+.ib-company-list-categories input,
+.ib-company-list-categories label {
     cursor: pointer;
 }
 
