@@ -21,8 +21,18 @@ get_header(); ?>
     <div class="row d-flex flex-xl-nowrap ib-main-container">
         <div class="col-xl-6 ib-main-left-block">
             <div class="ib-group-vectors ib-circles-left">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/bitmap.png"
-                     class="ib-main-image" alt="">
+
+				<?php
+				global $post;
+
+				$post_id = get_post_thumbnail_id( $post->ID );
+
+				$url_main_image = wp_get_attachment_url( $post_id, 'thumbnail' );
+				$alt = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
+				?>
+
+                <img src="<?php echo $url_main_image ?>" class="ib-main-image" alt="<?php echo $alt ?>"/>
+
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/group-vectors_left.png"
                      class="ib-group-vectors-left" alt="">
             </div>
