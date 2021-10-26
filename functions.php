@@ -139,7 +139,7 @@ function ib_display_companies() {
 	the_title();
 	echo '</h2>';
 
-	echo '<p class="ib-categories">' . __('Categories: ', 'twentytwentyone-child');
+	echo '<p class="ib-categories">' . __( 'Categories: ', 'twentytwentyone-child' );
 	$terms = get_the_terms( $post->ID, 'company_categories' );
 
 	foreach ( $terms as $term ) {
@@ -147,7 +147,7 @@ function ib_display_companies() {
 	}
 	echo '</p>';
 
-	echo '<p class="ib-types">' . __('Types: ', 'twentytwentyone-child');
+	echo '<p class="ib-types">' . __( 'Types: ', 'twentytwentyone-child' );
 	$terms = get_the_terms( $post->ID, 'company_types' );
 
 	foreach ( $terms as $term ) {
@@ -155,39 +155,18 @@ function ib_display_companies() {
 	}
 	echo '</p>';
 
-	echo '<p class="ib-price">' . __('Starting at ', 'twentytwentyone-child');
+	echo '<p class="ib-price">' . __( 'Starting at ', 'twentytwentyone-child' );
 	the_field( 'ib_price' );
 	echo '</p>';
 
-	echo '<span class="far fa-star ';
-	if ( $ratingstar >= 1 ) {
-		echo 'checked';
-	}
-	echo '"></span>';
 
-	echo '<span class="far fa-star ';
-	if ( $ratingstar >= 2 ) {
-		echo 'checked';
+	for ($i = 0; $i <= 4; $i++) {
+		if ( $i < $ratingstar) {
+			echo '<span class="far fa-star checked"></span>';
+		} else {
+			echo '<span class="far fa-star"></span>';
+		}
 	}
-	echo '"></span>';
-
-	echo '<span class="far fa-star ';
-	if ( $ratingstar >= 3 ) {
-		echo 'checked';
-	}
-	echo '"></span>';
-
-	echo '<span class="far fa-star ';
-	if ( $ratingstar >= 4 ) {
-		echo 'checked';
-	}
-	echo '"></span>';
-
-	echo '<span class="far fa-star ';
-	if ( $ratingstar == 5 ) {
-		echo 'checked';
-	}
-	echo '"></span>';
 
 	echo '</div>';
 
