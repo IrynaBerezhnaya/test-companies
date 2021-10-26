@@ -38,10 +38,11 @@ get_header(); ?>
             </div>
         </div>
         <div class="col-xl-6 ib-main-text">
-			<?php echo '<h2>' . __( 'Find a Company', 'twentytwentyone-child' ) . '</h2>'; ?>
-			<?php echo '<p>' . __( 'Welcome to the "Find a company" Portal! This allows you to search for and access company information from
-                the national business registers.', 'twentytwentyone-child' ) . '</p>'; ?>
+
+	        <?php the_content(); ?>
+
 			<?php get_search_form(); ?>
+
         </div>
     </div>
     <p class="ib-nav-company-types">
