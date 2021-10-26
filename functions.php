@@ -135,9 +135,8 @@ function ib_display_companies() {
 
 	echo '<img src="' . $image[0] . '" />';
 
-	echo '<h2>';
-	the_title();
-	echo '</h2>';
+	$short_title = substr( get_the_title(), 0, 25 );
+	echo '<h2>' . $short_title . '</h2>';
 
 	echo '<p class="ib-categories">' . __( 'Categories: ', 'twentytwentyone-child' );
 	$terms = get_the_terms( $post->ID, 'company_categories' );
@@ -160,8 +159,8 @@ function ib_display_companies() {
 	echo '</p>';
 
 
-	for ($i = 0; $i <= 4; $i++) {
-		if ( $i < $ratingstar) {
+	for ( $i = 0; $i <= 4; $i ++ ) {
+		if ( $i < $ratingstar ) {
 			echo '<span class="far fa-star checked"></span>';
 		} else {
 			echo '<span class="far fa-star"></span>';
