@@ -25,7 +25,8 @@
             <div class="col-6 col-sm-3 col-lg-3">
 				<?php echo '<a href="#" class="ib-footer-logo">' . __( 'Logo', 'twentytwentyone-child' ); ?>
 				<?php echo '<p class="ib-footer-logo-text mb-0 pt-2">' . __( 'All Rights Reserved.', 'twentytwentyone-child' ) . '</p>'; ?>
-                <span class="ib-circle">C </span><span class="ib-footer-logo-text"> 2021</span></a>
+	            <?php $current_year = date ( 'Y' ); ?>
+	            <?php echo '<p class="ib-footer-logo-text">&copy; ' . $current_year . '</p></a>'; ?>
             </div>
             <div class="col-6 col-sm-3 col-lg-2 pb-4 pb-sm-0">
                 <div class="list-group">
