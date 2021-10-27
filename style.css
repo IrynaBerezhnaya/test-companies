@@ -117,14 +117,19 @@ a:hover,
     color: #fff;
 }
 
-.ib-search-input {
+.ib-search-input,
+.wpcf7-form-control-wrap input {
     background-color: transparent;
     border: 1px solid #D8D8D8;
     border-radius: 30px;
-    min-width: 292px;
+    max-width: 292px;
+    padding: 6px 10px;
+    margin-top: 20px;
+    color: #fff;
 }
 
-.ib-search-input::placeholder {
+.ib-search-input::placeholder,
+.wpcf7-form-control-wrap input::placeholder{
     font-size: 13px;
     line-height: 20px;
     color: #fff;
@@ -331,6 +336,7 @@ li {
     font-size: 11px;
 }
 
+.wpcf7-form p label,
 .ib-title-footer {
     font-weight: 900;
     font-size: 17px;
@@ -443,7 +449,8 @@ li {
         min-width: 288px;
     }
 
-    .ib-search-input {
+    .ib-search-input,
+    .wpcf7-form-control-wrap input {
         min-width: auto;
     }
 
@@ -454,7 +461,7 @@ li {
     }
 
     .search-form {
-         padding-top: 0;
+        padding-top: 0;
     }
 
     .ib-main-container {

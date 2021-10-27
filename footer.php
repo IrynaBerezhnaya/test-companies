@@ -57,9 +57,7 @@
             </div>
             <div class="col-6 col-sm-6 col-lg-3">
                 <div class="list-group">
-					<?php echo '<h3 class="ib-title-footer">' . __( 'Subscribe', 'twentytwentyone-child' ) . '</h3>'; ?>
-                    <input class="form-control me-2 ib-search-input" type="search" placeholder="Enter"
-                           aria-label="Search">
+	                <?php echo do_shortcode('[contact-form-7 id="146" title="Contact form 1"]') ?>
 					<?php echo '<p class="ib-subscribe">' . __( 'Depending on the company, a user experience designer may need to be a jack
                         of all trades', 'twentytwentyone-child' ) . '</p>'; ?>
                 </div>
