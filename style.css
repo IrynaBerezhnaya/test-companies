@@ -433,6 +433,29 @@ li {
     align-items: flex-start;
 }
 
+.ib-pagination {
+    text-align: right;
+}
+
+.ib-pagination-prev,
+.ib-pagination-next {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #1D1A21;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    color: #828282;
+    text-decoration: none;
+    text-align: center;
+    font-size: 38px;
+    line-height: 38px;
+}
+
+.ib-pagination-next {
+    margin-right: 15px;
+}
+
 @media screen and (max-width: 1366px) {
     .ib-circles-left:after {
         top: 54%;

@@ -28,7 +28,7 @@ get_header(); ?>
 				$post_id = get_post_thumbnail_id( $post->ID );
 
 				$url_main_image = wp_get_attachment_url( $post_id, 'thumbnail' );
-				$alt = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
+				$alt            = get_post_meta( $post_id, '_wp_attachment_image_alt', true );
 				?>
 
                 <img src="<?php echo $url_main_image ?>" class="ib-main-image" alt="<?php echo $alt ?>"/>
@@ -39,7 +39,7 @@ get_header(); ?>
         </div>
         <div class="col-xl-6 ib-main-text">
 
-	        <?php the_content(); ?>
+			<?php the_content(); ?>
 
 			<?php get_search_form(); ?>
 
@@ -94,7 +94,15 @@ get_header(); ?>
 
         <div class="d-flex flex-wrap ib-custom-posts" id="response">
 			<?php
-			$args = array( 'post_type' => 'company', 'posts_per_page' => 12 );
+			if ( get_query_var( 'paged' ) ) {
+				$paged = get_query_var( 'paged' );
+			} else if ( get_query_var( 'page' ) ) {
+				$paged = get_query_var( 'page' );
+			} else {
+				$paged = 1;
+			}
+
+			$args = array( 'post_type' => 'company', 'posts_per_page' => 4, 'paged' => $paged, );
 			$loop = new WP_Query( $args );
 
 			while ( $loop->have_posts() ) : $loop->the_post();
@@ -102,9 +110,16 @@ get_header(); ?>
 				ib_display_companies();
 
 			endwhile;
+
+			printf( '<div class="ib-pagination">%s</div>', get_previous_posts_link( '>', $loop->max_num_pages ) );
+
+			printf( '<div class="ib-pagination">%s</div>', get_next_posts_link( '<', $loop->max_num_pages ) );
+
 			wp_reset_postdata(); ?>
+
         </div>
     </div>
+
 </div>
 
 <div>
@@ -113,7 +128,4 @@ get_header(); ?>
 </div>
 
 
-<?php
-
-
-get_footer(); ?>
+<?php get_footer(); ?>
