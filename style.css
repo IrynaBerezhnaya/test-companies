@@ -423,6 +423,10 @@ li {
     z-index: 1;
 }
 
+.list-group {
+    align-items: flex-start;
+}
+
 @media screen and (max-width: 1366px) {
     .ib-circles-left:after {
         top: 54%;
