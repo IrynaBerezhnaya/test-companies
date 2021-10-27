@@ -127,13 +127,10 @@ function ib_display_companies() {
 
 	echo '<div class="ib-company">';
 
-	$attachment_id = get_field( 'ib_logo' );
-	$size          = array( 180, 180 );
-	$image         = wp_get_attachment_image_src( $attachment_id, $size );
+	$post_id     = get_post_thumbnail_id( $post->ID );
+	$url_company = wp_get_attachment_url( $post_id, 'thumbnail' );
 
-	$ratingstar = get_field( 'ib_star_rating' );
-
-	echo '<img src="' . $image[0] . '" />';
+	echo '<img src="' . $url_company . '" />';
 
 	$short_title = substr( get_the_title(), 0, 25 );
 	echo '<h2>' . $short_title . '</h2>';
@@ -158,6 +155,7 @@ function ib_display_companies() {
 	the_field( 'ib_price' );
 	echo '</p>';
 
+	$ratingstar = get_field( 'ib_star_rating' );
 
 	for ( $i = 0; $i <= 4; $i ++ ) {
 		if ( $i < $ratingstar ) {
@@ -170,3 +168,4 @@ function ib_display_companies() {
 	echo '</div>';
 
 }
+
