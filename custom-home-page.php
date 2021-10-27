@@ -102,7 +102,7 @@ get_header(); ?>
 				$paged = 1;
 			}
 
-			$args = array( 'post_type' => 'company', 'posts_per_page' => 4, 'paged' => $paged, );
+			$args = array( 'post_type' => 'company', 'posts_per_page' => 5, 'paged' => $paged, );
 			$loop = new WP_Query( $args );
 
 			while ( $loop->have_posts() ) : $loop->the_post();
@@ -111,14 +111,14 @@ get_header(); ?>
 
 			endwhile;
 
-			printf( '<div class="ib-pagination">%s</div>', get_previous_posts_link( '>', $loop->max_num_pages ) );
-
-			printf( '<div class="ib-pagination">%s</div>', get_next_posts_link( '<', $loop->max_num_pages ) );
-
 			wp_reset_postdata(); ?>
 
         </div>
     </div>
+        <?php echo '<div class="ib-pagination">';
+        echo get_previous_posts_link( '>', $loop->max_num_pages );
+        echo get_next_posts_link( '<', $loop->max_num_pages );
+        echo '</div>';?>
 
 </div>
 

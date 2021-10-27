@@ -52,7 +52,9 @@ a:hover,
 }
 
 .ib-company-list-categories input,
-.ib-company-list-categories label {
+.ib-company-list-categories label,
+.ib-company-list-types input,
+.ib-company-list-types label {
     cursor: pointer;
 }
 
@@ -455,6 +457,7 @@ li {
 .ib-pagination-next {
     margin-right: 15px;
 }
+
 
 @media screen and (max-width: 1366px) {
     .ib-circles-left:after {
