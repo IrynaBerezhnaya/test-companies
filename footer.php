@@ -25,8 +25,8 @@
             <div class="col-6 col-sm-3 col-lg-3">
 				<?php echo '<a href="#" class="ib-footer-logo">' . __( 'Logo', 'twentytwentyone-child' ); ?>
 				<?php echo '<p class="ib-footer-logo-text mb-0 pt-2">' . __( 'All Rights Reserved.', 'twentytwentyone-child' ) . '</p>'; ?>
-	            <?php $current_year = date ( 'Y' ); ?>
-	            <?php echo '<p class="ib-footer-logo-text">&copy; ' . $current_year . '</p></a>'; ?>
+				<?php $current_year = date( 'Y' ); ?>
+				<?php echo '<p class="ib-footer-logo-text">&copy; ' . $current_year . '</p></a>'; ?>
             </div>
             <div class="col-6 col-sm-3 col-lg-2 pb-4 pb-sm-0">
                 <div class="list-group">
@@ -57,7 +57,9 @@
             </div>
             <div class="col-6 col-sm-6 col-lg-3">
                 <div class="list-group">
-	                <?php echo do_shortcode('[contact-form-7 id="146" title="Contact form 1"]') ?>
+
+					<?php echo get_field( 'ib_form' ); ?>
+
 					<?php echo '<p class="ib-subscribe">' . __( 'Depending on the company, a user experience designer may need to be a jack
                         of all trades', 'twentytwentyone-child' ) . '</p>'; ?>
                 </div>
