@@ -566,6 +566,10 @@ input[type=submit] {
     color: #000;
 }
 
+.active {
+    color: #000;
+}
+
 
 @media screen and (max-width: 1366px) {
     .ib-circles-left:after {

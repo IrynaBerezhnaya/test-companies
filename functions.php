@@ -197,5 +197,7 @@ function ib_show_pagination( $post_qty, $page ) {
 
 		echo '<a href="#" class="ib-link-pagination link_pagination__js' . $active . '">' . $i . '</a>';
 	}
+
+
 }
 
