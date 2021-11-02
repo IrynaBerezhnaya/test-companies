@@ -162,7 +162,8 @@ input[type=email]:focus,
 .primary-menu-container,
 .primary-navigation a:hover,
 .primary-navigation a:link,
-.primary-navigation a:visited {
+.primary-navigation a:visited,
+.singular .entry-title {
     color: #fff;
 }
 

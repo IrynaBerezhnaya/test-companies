@@ -124,7 +124,7 @@ function ib_filter_companies_ajax_handler() {
 		}
 
 		ob_start();
-		ib_show_pagination( $post_qty );
+		ib_show_pagination( $post_qty, $page );
 		$response['pagination'] = ob_get_clean();
 		echo json_encode( $response );
 
@@ -185,14 +185,17 @@ function ib_display_companies() {
 
 }
 
-function ib_show_pagination( $post_qty ) {
+function ib_show_pagination( $post_qty, $page ) {
 
 	$posts_per_page = get_option( 'posts_per_page' );
 
 	$pages_qty = ceil( $post_qty / $posts_per_page );
 
 	for ( $i = 1; $i <= $pages_qty; $i ++ ) {
-		echo '<a href="#" class="ib-link-pagination link_pagination__js">' . $i . '</a>';
+
+		$active = $i == $page ? ' active ' : '';
+
+		echo '<a href="#" class="ib-link-pagination link_pagination__js' . $active . '">' . $i . '</a>';
 	}
 }
 

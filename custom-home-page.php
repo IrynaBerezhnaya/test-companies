@@ -99,7 +99,7 @@ get_header(); ?>
 
         <div class="d-flex flex-wrap ib-custom-posts" id="companies">
 			<?php
-			$posts_per_page = get_option('posts_per_page');
+			$posts_per_page = get_option( 'posts_per_page' );
 
 			if ( get_query_var( 'paged' ) ) {
 				$paged = get_query_var( 'paged' );
@@ -128,8 +128,8 @@ get_header(); ?>
 	<?php echo '<div class="ib-pagination" id="pagination">';
 
 	$post_qty = $loop->found_posts;
-
-	ib_show_pagination( $post_qty );
+	$page     = 1;
+	ib_show_pagination( $post_qty, $page );
 
 	echo '</div>'; ?>
 
