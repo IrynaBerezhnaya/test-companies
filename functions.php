@@ -3,6 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Adding scripts and styles
+ */
 function add_scripts_and_styles() {
 	$theme   = wp_get_theme( 'twentytwentyone' );
 	$version = $theme->get( 'Version' );
@@ -52,7 +55,6 @@ if ( ! function_exists( 'write_log' ) ) {
 	}
 }
 
-
 function mb_var_dump( $variable, $text_before = '' ) {
 
 	$text_before = ! empty ( $text_before ) ? $text_before . ': ' : '';
@@ -67,7 +69,13 @@ function mb_var_dump( $variable, $text_before = '' ) {
  */
 function ib_filter_companies_ajax_handler() {
 
+	global $wp_query;
+
 	$filter_data = isset( $_POST['filter_data'] ) ? $_POST['filter_data'] : '';
+
+	$posts_per_page = get_option( 'posts_per_page' );
+
+	$page = isset( $_POST['page'] ) ? $_POST['page'] : 1;
 
 	if ( ! empty( $filter_data ) ) {
 
@@ -94,24 +102,32 @@ function ib_filter_companies_ajax_handler() {
 		$args = array(
 			'orderby'        => 'date',
 			'post_type'      => 'company',
-			'posts_per_page' => - 1,
+			'posts_per_page' => $posts_per_page,
 			'tax_query'      => $tax_query,
+			'offset'         => $posts_per_page * ( $page - 1 ),
 		);
 
+		$query = new WP_Query( $args );
 
-		$query    = new WP_Query( $args );
-		$response = '';
+		$post_qty = $query->found_posts;
+		$response = [];
 
 		if ( $query->have_posts() ) {
+			ob_start();
 			while ( $query->have_posts() ) : $query->the_post();
-				$response .= ib_display_companies();
+				ib_display_companies();
 			endwhile;
+			$response['companies'] = ob_get_clean();
 			wp_reset_postdata();
 		} else {
 			$response = 'empty';
 		}
 
-		echo $response;
+		ob_start();
+		ib_show_pagination( $post_qty );
+		$response['pagination'] = ob_get_clean();
+		echo json_encode( $response );
+
 		wp_die();
 	}
 }
@@ -167,5 +183,16 @@ function ib_display_companies() {
 
 	echo '</div>';
 
+}
+
+function ib_show_pagination( $post_qty ) {
+
+	$posts_per_page = get_option( 'posts_per_page' );
+
+	$pages_qty = ceil( $post_qty / $posts_per_page );
+
+	for ( $i = 1; $i <= $pages_qty; $i ++ ) {
+		echo '<a href="#" class="ib-link-pagination link_pagination__js">' . $i . '</a>';
+	}
 }
 

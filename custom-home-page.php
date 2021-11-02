@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 get_header(); ?>
 
 <div>
@@ -62,28 +61,34 @@ get_header(); ?>
 					'taxonomy' => 'company_types'
 				] );
 
-				echo '<h4>' . __( 'All Сompany Сategories:', 'twentytwentyone-child' ) . '</h4>';
+				if ( ! empty( $categories ) ) {
+					echo '<fieldset class="taxonomy__js" data-taxonomy="company_category">';
+					echo '<h4>' . __( 'All Сompany Сategories:', 'twentytwentyone-child' ) . '</h4>';
+					foreach ( $categories as $category ) : ?>
+                        <div class="ib-company-list-categories">
+                            <input type="checkbox" name="categories[]"
+                                   id="company_categories_<?php echo $category->term_id; ?>"
+                                   value="<?php echo $category->slug; ?>" data-slug="<?php echo $category->slug; ?>">
+                            <label for="company_categories_<?php echo $category->term_id; ?>"> <?php echo $category->name; ?> </label>
+                        </div>
+					<?php endforeach;
+					echo '</fieldset>';
+				}
 
-				foreach ( $categories as $category ) : ?>
-                    <div class="ib-company-list-categories">
-                        <input type="checkbox" name="categories[]" class="company_list_js"
-                               id="company_categories_<?php echo $category->term_id; ?>" data-type="company"
-                               value="<?php echo $category->slug; ?>" data-slug="<?php echo $category->slug; ?>">
-                        <label for="company_categories_<?php echo $category->term_id; ?>"> <?php echo $category->name; ?> </label>
-                    </div>
-				<?php endforeach;
 
-				echo '<h4 class="ib-title-company-types">' . __( 'All Сompany Types:', 'twentytwentyone-child' ) . '</h4>';
+				if ( ! empty( $tags ) ) {
+					echo '<fieldset class="taxonomy__js" data-taxonomy="company_type">';
+					echo '<h4 class="ib-title-company-types">' . __( 'All Сompany Types:', 'twentytwentyone-child' ) . '</h4>';
 
-				foreach ( $tags as $tag ) : ?>
-                    <div class="ib-company-list-types">
-                        <input type="checkbox" name="types[]" class="company_list_js"
-                               id="company_types_<?php echo $tag->term_id; ?>" data-type="company"
-                               value="<?php echo $tag->slug; ?>" data-slug="<?php echo $tag->slug; ?>">
-                        <label for="company_types_<?php echo $tag->term_id; ?>"> <?php echo $tag->name; ?> </label>
-                    </div>
-				<?php endforeach;
-
+					foreach ( $tags as $tag ) : ?>
+                        <div class="ib-company-list-types">
+                            <input type="checkbox" name="types[]" id="company_types_<?php echo $tag->term_id; ?>"
+                                   value="<?php echo $tag->slug; ?>" data-slug="<?php echo $tag->slug; ?>">
+                            <label for="company_types_<?php echo $tag->term_id; ?>"> <?php echo $tag->name; ?> </label>
+                        </div>
+					<?php endforeach;
+					echo '</fieldset>';
+				}
 				echo '<button type="submit" class="btn btn-light ib-btn-filter">' . __( 'Filter', 'twentytwentyone-child' ) . '</button>';
 				?>
 
@@ -92,8 +97,10 @@ get_header(); ?>
 
         </div>
 
-        <div class="d-flex flex-wrap ib-custom-posts" id="response">
+        <div class="d-flex flex-wrap ib-custom-posts" id="companies">
 			<?php
+			$posts_per_page = get_option('posts_per_page');
+
 			if ( get_query_var( 'paged' ) ) {
 				$paged = get_query_var( 'paged' );
 			} else if ( get_query_var( 'page' ) ) {
@@ -102,8 +109,9 @@ get_header(); ?>
 				$paged = 1;
 			}
 
-			$args = array( 'post_type' => 'company', 'posts_per_page' => 5, 'paged' => $paged, );
+			$args = array( 'post_type' => 'company', 'posts_per_page' => $posts_per_page, 'paged' => $paged, );
 			$loop = new WP_Query( $args );
+
 
 			while ( $loop->have_posts() ) : $loop->the_post();
 
@@ -111,14 +119,19 @@ get_header(); ?>
 
 			endwhile;
 
+
 			wp_reset_postdata(); ?>
 
         </div>
+
     </div>
-        <?php echo '<div class="ib-pagination">';
-        echo get_previous_posts_link( '>', $loop->max_num_pages );
-        echo get_next_posts_link( '<', $loop->max_num_pages );
-        echo '</div>';?>
+	<?php echo '<div class="ib-pagination" id="pagination">';
+
+	$post_qty = $loop->found_posts;
+
+	ib_show_pagination( $post_qty );
+
+	echo '</div>'; ?>
 
 </div>
 
@@ -126,6 +139,5 @@ get_header(); ?>
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/group-vectors_bottom.png"
          class="ib-group-vectors-bottom" alt="">
 </div>
-
 
 <?php get_footer(); ?>

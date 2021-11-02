@@ -350,6 +350,10 @@ input[type=submit] {
     min-width: 250px;
 }
 
+.ib-loop-categories-types fieldset {
+    padding: 0;
+}
+
 .ib-btn-filter {
     margin-top: 15px;
 }
@@ -538,6 +542,29 @@ input[type=submit] {
 .site a:focus:not(.wp-block-button__link):not(.wp-block-file__button) {
     background: #1D1A21;
 }
+
+.ib-link-pagination {
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    background: #ccc;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 5px;
+    transition: .3s;
+}
+
+.ib-link-pagination:last-of-type {
+    margin-right: 0;
+}
+
+.ib-link-pagination:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
 
 @media screen and (max-width: 1366px) {
     .ib-circles-left:after {
