@@ -5,21 +5,42 @@ jQuery(document).ready(function ($) {
     filter.on('submit', function (e) {
         e.preventDefault();
 
+        var $form = $(this),
+            page = 1;
+        filterCompanies(filter.serialize(), page);
+
+    });
+
+    $('#pagination').on('click', '.link_pagination__js', function (e) {
+        e.preventDefault();
+        var $link = $(this),
+            page = $link.text();
+
+        $('.link_pagination__js.active').removeClass('active');
+        $link.addClass('active');
+
+        filterCompanies(filter.serialize(), page);
+    });
+
+
+    function filterCompanies(data, page) {
+
         $.ajax({
             url: ib_localize.admin_url,
             type: 'POST',
-            dataType: 'html',
+            dataType: 'json',
             data: {
                 action: 'ib_filter_companies',
-                filter_data: filter.serialize(),
+                filter_data: data,
+                page: page,
             },
             success: function (response) {
                 if (response !== 'false') {
-                    $('#response').html(response);
+                    $('#companies').html(response.companies);
+                    $('#pagination').html(response.pagination);
                 }
             }
         });
-    });
-
+    }
 
 });
